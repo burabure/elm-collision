@@ -83,11 +83,6 @@ type Side
 
     rectangleSide rect1 rect2 -- Just Right
     -- rect1 is coliding with it's right side onto rect2
-
-Current implementation note: this algorithm is very efficient but
-has some issues handling corner to corner collision, I'm planning on a
-way to solve this on a next release. Right now just know that
-corner to corner collision may not get reported at all
 -}
 rectangleSide : Hitbox.Rectangle -> Hitbox.Rectangle -> Maybe Side
 rectangleSide rect1 rect2 =
