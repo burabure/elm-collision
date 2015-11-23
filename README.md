@@ -2,6 +2,8 @@
 
 Detect collision/intersection of geometry in a defined coordinate space, AKA: tell me when objects are touching or overlapping
 
+![elm-collision demo](https://raw.githubusercontent.com/burabure/elm-collision/master/elm-collision.png)
+
 This library is useful for games, interactive apps, dynamic element composition and other cases where you need efficient detection of overlapping objects
 
 Right now this library supports a small set of 2D operations, but the intent is to keep a powerful set of 2D and 3D operations while maintaining a focused and clear API
@@ -10,11 +12,11 @@ Right now this library supports a small set of 2D operations, but the intent is 
 ### Get Started
 
 - Read the [the documentation][docs].
-- Look and try [the examples][examples].
+- Try and read the code of [the examples][examples].
 
 [docs]: http://package.elm-lang.org/packages/burabure/elm-collision/latest/
 [examples]:
-https://github.com/burabure/elm-collision/examples/
+https://github.com/burabure/elm-collision/tree/master/examples
 
 
 ### Contributing
