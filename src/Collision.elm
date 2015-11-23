@@ -9,7 +9,7 @@ module Collision
 AKA tell me when objects are touching or overlapping
 
 # Rectangle to rectangle
-@docs axisAlignedBoundingBox, rectangleSide
+@docs axisAlignedBoundingBox, Side, rectangleSide
 
 # Circle to circle
 @docs circleToCircle
