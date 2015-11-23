@@ -16,8 +16,8 @@ so they're compatible with the core Graphics.Collage coordinate system.
 
 
 {-| Represents rectangular hitbox geometry.
-You should only use this type for type annotations, don't depend on the constructor
-instead, use the rectangle function
+You should only use this type for type annotations, don't depend on the constructor,
+ instead, use the rectangle function
 
     -- GOOD
     myRectangle : Hitbox.Rectangle
@@ -35,9 +35,10 @@ internal change on the Rectangle type definition
 type alias Rectangle = { cx: Float, cy: Float, w : Float, h : Float }
 
 
-{-| Create a Rectangle hitbox from geometry (width and height) and coordinates (x, y)
+{-| Create a Rectangle hitbox from geometry (width and height) and coordinates (cx, cy)
 
-    rectangle 5 5 10 10 -- a 10 x 10 rectangle centered on coordinates 5,5
+    rectangle 5 5 10 10
+    -- a 10 x 10 rectangle centered on coordinates 5,5
 -}
 rectangle : Float -> Float -> Float -> Float -> Rectangle
 rectangle centerX centerY width height =
@@ -45,7 +46,7 @@ rectangle centerX centerY width height =
 
 
 {-| Represents circular geometry.
-You should only use this type for type annotations, don't depend on the constructor
+You should only use this type for type annotations, don't depend on the constructor,
 instead, use the circle function
 
     -- GOOD
@@ -64,7 +65,7 @@ internal change on the Circle type definition
 type alias Circle = { cx: Float, cy: Float, radius : Float }
 
 
-{-| Create a Circle Hitbox from geometry (radius) and coordinates (x, y)
+{-| Create a Circle Hitbox from geometry (radius) and coordinates (cx, cy)
 
     circle 5 5 10 -- a radius 10 circle centered on coordinates 5,5
 -}

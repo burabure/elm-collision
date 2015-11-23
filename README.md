@@ -14,9 +14,9 @@ Right now this library supports a small set of 2D operations, but the intent is 
 - Read the [the documentation][docs].
 - Try and read the code of [the examples][examples].
 
-[docs]: http://package.elm-lang.org/packages/burabure/elm-collision/latest/
+[docs]: http://package.elm-lang.org/packages/BuraBure/elm-collision/latest/
 [examples]:
-https://github.com/burabure/elm-collision/tree/master/examples
+http://github.com/burabure/elm-collision/tree/master/examples/
 
 
 ### Contributing
