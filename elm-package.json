@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "summary": "Detect collision of geometry in coordinate space AKA: are objects touching or overlapping?",
+    "repository": "https://github.com/BuraBure/elm-collision.git",
+    "license": "BSD3",
+    "source-directories": [
+        "src"
+    ],
+    "exposed-modules": [
+        "Collision",
+        "Collision.Hitbox"
+    ],
+    "dependencies": {
+        "elm-lang/core": "3.0.0 <= v < 4.0.0"
+    },
+    "elm-version": "0.16.0 <= v < 0.17.0"
+}
