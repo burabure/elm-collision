@@ -2,7 +2,7 @@
 
 Detect collision/intersection of geometry in a defined coordinate space, AKA: tell me when objects are touching or overlapping
 
-![elm-collision demo](https://raw.githubusercontent.com/burabure/elm-collision/master/elm-collision.png)
+![elm-collision demo](https://raw.githubusercontent.com/burabure/elm-collision/master/elm-collision.gif)
 
 This library is useful for games, interactive apps, dynamic element composition and other cases where you need efficient detection of overlapping objects
 
