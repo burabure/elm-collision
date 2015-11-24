@@ -1,4 +1,4 @@
-module Collision
+module Collision2D
   ( axisAlignedBoundingBox
   , circleToCircle
   , Side(Top, Right, Bottom, Left)
@@ -9,8 +9,12 @@ module Collision
   , circle
   ) where
 
-{-| Detect collision/intersection of geometry in a defined coordinate space
-AKA tell me when objects are touching or overlapping
+{-| Detect collision/intersection of geometry in a defined 2D coordinate space
+AKA tell me when objects are touching or overlapping.
+
+All objects use the same coordinate system you might see in an algebra or
+physics problem, origin (0,0) is at the center of the object,
+so they're compatible with the core Graphics.Collage coordinate system.
 
 # Basic geometry
 @docs Rectangle, rectangle, Circle, circle
@@ -52,11 +56,11 @@ circle centerX centerY radius =
   Circle { cx = centerX, cy = centerY, radius = radius }
 
 
-{-| Detect collision between two Rectangles that
-are axis aligned — meaning no rotation.
+{-| Super efficient collision detection between
+two Rectangles that are axis aligned — meaning no rotation.
 
-    rect1 = { cx = 5, cy = 5, w = 10, h = 10 }
-    rect2 = { cx = 7, cy = 5, w = 10, h = 10 }
+    rect1 = rectangle 5 5 10 10
+    rect2 = rectangle 7 5 10 10
 
     axisAlignedBoundingBox rect1 rect2 -- True
     -- rect1 is coliding with rect2
@@ -79,10 +83,10 @@ axisAlignedBoundingBox (Rectangle rect1) (Rectangle rect2) =
       False
 
 
-{-| Detect collision between two Circles
+{-| Super efficient collision detection between two Circles
 
-    circle1 = { cx = 5, cy = 5, radius = 5 }
-    circle2 = { cx = 7, cy = 5, radius = 5 }
+    circle1 = circle 5 5 5
+    circle2 = circle 7 5 5
 
     circleToCircle circle1 circle2 -- True
     -- circle1 is coliding with circle2
@@ -109,10 +113,10 @@ type Side
   | Left
 
 
-{-| Detect which side of a Rectangle is colliding with another Rectangle
+{-| Very efficiently detect which side of a Rectangle is colliding with another Rectangle
 
-    rect1 = { cx = 5, cy = 5, w = 10, h = 10 }
-    rect2 = { cx = 7, cy = 5, w = 10, h = 10 }
+    rect1 = rectangle 5 5 10 10
+    rect2 = rectangle 7 5 10 10
 
     rectangleSide rect1 rect2 -- Just Right
     -- rect1 is coliding with it's right side onto rect2

@@ -4,9 +4,7 @@ Detect collision/intersection of geometry in a defined coordinate space, AKA: te
 
 ![elm-collision demo](https://raw.githubusercontent.com/burabure/elm-collision/master/elm-collision.gif)
 
-This library is useful for games, interactive apps, dynamic element composition and other cases where you need efficient detection of overlapping objects
-
-Right now this library supports a small set of 2D operations, but the intent is to keep a powerful set of 2D and 3D operations while maintaining a focused and clear API
+This library is useful for games, interactive apps, dynamic element composition and other cases where you need very efficient detection of overlapping objects
 
 
 ### Get Started

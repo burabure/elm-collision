@@ -3,7 +3,7 @@ import Graphics.Collage as Collage
 import Graphics.Element as Element
 import Mouse
 import Window
-import Collision
+import Collision2D
 
 
 main : Signal Element.Element
@@ -18,16 +18,16 @@ scene (x,y) (w,h) =
       (toFloat x - toFloat w / 2, toFloat h / 2 - toFloat y)
 
     circle1Hitbox = -- Create a circular hitbox
-      Collision.circle dx dy 30
+      Collision2D.circle dx dy 30
 
     circle2Hitbox = -- Create a circular hitbox
-      Collision.circle 0 0 40
+      Collision2D.circle 0 0 40
 
-    circlesCollision = -- Test if circles are colliding
-      Collision.circleToCircle circle1Hitbox circle2Hitbox
+    circlesCollision2D = -- Test if circles are colliding
+      Collision2D.circleToCircle circle1Hitbox circle2Hitbox
 
     circleColor = -- If circles collide change color
-      if circlesCollision then Color.red else Color.blue
+      if circlesCollision2D then Color.red else Color.blue
 
   in
     Collage.collage w h
@@ -38,7 +38,7 @@ scene (x,y) (w,h) =
           |> Collage.filled Color.orange
           |> Collage.move (dx, dy)
 
-      , message "Collision" circlesCollision
+      , message "Collision2D" circlesCollision2D
       ]
 
 

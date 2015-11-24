@@ -3,7 +3,7 @@ import Graphics.Collage as Collage
 import Graphics.Element as Element
 import Mouse
 import Window
-import Collision
+import Collision2D
 
 
 main : Signal Element.Element
@@ -18,16 +18,16 @@ scene (x,y) (w,h) =
       (toFloat x - toFloat w / 2, toFloat h / 2 - toFloat y)
 
     rectangle1Hitbox = -- Create a rectangle hitbox
-      Collision.rectangle dx dy 60 60
+      Collision2D.rectangle dx dy 60 60
 
     rectangle2Hitbox = -- Create a rectangle hitbox
-      Collision.rectangle 0 0 80 80
+      Collision2D.rectangle 0 0 80 80
 
-    rectanglesCollision = -- Which side of rectangle1 is colliding?
-      Collision.rectangleSide rectangle1Hitbox rectangle2Hitbox
+    rectanglesCollision2D = -- Which side of rectangle1 is colliding?
+      Collision2D.rectangleSide rectangle1Hitbox rectangle2Hitbox
 
     rectangleColor = -- If rectangles collide change color
-      if rectanglesCollision /= Nothing then Color.red else Color.blue
+      if rectanglesCollision2D /= Nothing then Color.red else Color.blue
 
   in
     Collage.collage w h
@@ -38,7 +38,7 @@ scene (x,y) (w,h) =
           |> Collage.filled Color.orange
           |> Collage.move (dx, dy)
 
-      , message "Side" rectanglesCollision
+      , message "Side" rectanglesCollision2D
           |> Collage.move (dx, dy + 10)
       ]
 
