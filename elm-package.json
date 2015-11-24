@@ -1,5 +1,5 @@
 {
-    "version": "2.0.1",
+    "version": "2.0.2",
     "summary": "Detect collision of geometry in coordinate space, AKA: are objects overlapping?",
     "repository": "https://github.com/burabure/elm-collision.git",
     "license": "BSD3",
