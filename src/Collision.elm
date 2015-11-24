@@ -38,15 +38,6 @@ rectangle centerX centerY width height =
   Rectangle { cx = centerX, cy = centerY, w = width, h = height }
 
 
--- private
-getRectangle : Rectangle -> { cx: Float, cy: Float, w : Float, h : Float }
-getRectangle rect =
-  case rect of
-    Rectangle rectangle ->
-      rectangle
-
-
-
 {-| Represents circular geometry.
 -}
 type Circle = Circle { cx: Float, cy: Float, radius : Float }
@@ -61,14 +52,6 @@ circle centerX centerY radius =
   Circle { cx = centerX, cy = centerY, radius = radius }
 
 
--- private
-getCircle : Circle -> { cx: Float, cy: Float, radius : Float }
-getCircle circ =
-  case circ of
-    Circle circle ->
-      circle
-
-
 {-| Detect collision between two Rectangles that
 are axis aligned — meaning no rotation.
 
@@ -79,10 +62,8 @@ are axis aligned — meaning no rotation.
     -- rect1 is coliding with rect2
 -}
 axisAlignedBoundingBox : Rectangle -> Rectangle -> Bool
-axisAlignedBoundingBox r1 r2 =
+axisAlignedBoundingBox (Rectangle rect1) (Rectangle rect2) =
   let
-    rect1 = getRectangle r1
-    rect2 = getRectangle r2
     startingPoint centerPoint length = centerPoint - (length / 2)
     x1 = startingPoint rect1.cx rect1.w
     x2 = startingPoint rect2.cx rect2.w
@@ -107,10 +88,8 @@ axisAlignedBoundingBox r1 r2 =
     -- circle1 is coliding with circle2
 -}
 circleToCircle : Circle -> Circle -> Bool
-circleToCircle c1 c2 =
+circleToCircle (Circle circle1) (Circle circle2) =
   let
-    circle1 = getCircle c1
-    circle2 = getCircle c2
     dx = circle1.cx - circle2.cx
     dy = circle1.cy - circle2.cy
     distance = sqrt ((dx * dx) + (dy * dy))
@@ -139,7 +118,7 @@ type Side
     -- rect1 is coliding with it's right side onto rect2
 -}
 rectangleSide : Rectangle -> Rectangle -> Maybe Side
-rectangleSide r1 r2 =
+rectangleSide (Rectangle rect1) (Rectangle rect2) =
   {-
     Calculate which side of a rectangle is colliding w/ another, it works by
     getting the Minkowski sum of rect2 and rect1, then checking where the centre of
@@ -147,8 +126,6 @@ rectangleSide r1 r2 =
     * thanks to sam hocevar @samhocevar for the formula!
   -}
   let
-    rect1 = getRectangle r1
-    rect2 = getRectangle r2
     w = 0.5 * (rect1.w + rect2.w)
     h = 0.5 * (rect1.h + rect2.h)
     dx = rect2.cx - rect1.cx
