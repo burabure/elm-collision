@@ -4,7 +4,6 @@ import Graphics.Element as Element
 import Mouse
 import Window
 import Collision
-import Collision.Hitbox as Hitbox
 
 
 main : Signal Element.Element
@@ -19,10 +18,10 @@ scene (x,y) (w,h) =
       (toFloat x - toFloat w / 2, toFloat h / 2 - toFloat y)
 
     circle1Hitbox = -- Create a circular hitbox
-      Hitbox.circle dx dy 30
+      Collision.circle dx dy 30
 
     circle2Hitbox = -- Create a circular hitbox
-      Hitbox.circle 0 0 40
+      Collision.circle 0 0 40
 
     circlesCollision = -- Test if circles are colliding
       Collision.circleToCircle circle1Hitbox circle2Hitbox
