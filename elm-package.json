@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "summary": "Detect collision of geometry in coordinate space, AKA: are objects overlapping?",
     "repository": "https://github.com/burabure/elm-collision.git",
     "license": "BSD3",
@@ -7,7 +7,7 @@
         "src"
     ],
     "exposed-modules": [
-        "Collision2D",
+        "Collision2D"
     ],
     "dependencies": {
         "elm-lang/core": "3.0.0 <= v < 4.0.0"

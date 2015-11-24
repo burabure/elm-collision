@@ -32,8 +32,12 @@ so they're compatible with the core Graphics.Collage coordinate system.
 type Rectangle = Rectangle { cx: Float, cy: Float, w : Float, h : Float }
 
 
-{-| Create a Rectangle hitbox from geometry (width and height) and coordinates (cx, cy)
+{-| Create a Rectangle hitbox from coordinates (cx, cy) and geometry (width and height)
 
+Arguments:
+    rectangle centerX centerY width height
+
+Example:
     rectangle 5 5 10 10
     -- a 10 x 10 rectangle centered on coordinates 5,5
 -}
@@ -47,8 +51,12 @@ rectangle centerX centerY width height =
 type Circle = Circle { cx: Float, cy: Float, radius : Float }
 
 
-{-| Create a Circle Hitbox from geometry (radius) and coordinates (cx, cy)
+{-| Create a Circle Hitbox from from coordinates (cx, cy) and geometry (radius)
 
+Arguments:
+    circle centerX centerY radius
+    
+Example:
     circle 5 5 10 -- a radius 10 circle centered on coordinates 5,5
 -}
 circle : Float -> Float -> Float -> Circle
