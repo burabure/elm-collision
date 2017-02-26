@@ -1,4 +1,4 @@
-module Collision2D
+module Collision2D exposing
   ( axisAlignedBoundingBox
   , circleToCircle
   , Side(Top, Right, Bottom, Left)
@@ -7,7 +7,7 @@ module Collision2D
   , rectangle
   , Circle
   , circle
-  ) where
+  )
 
 {-| Detect collision/intersection of geometry in a defined 2D coordinate space
 AKA tell me when objects are touching or overlapping.
