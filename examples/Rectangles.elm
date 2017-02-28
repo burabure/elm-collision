@@ -1,14 +1,50 @@
 import Color
-import Graphics.Collage as Collage
-import Graphics.Element as Element
+import Collage
+import Element
 import Mouse
-import Window
 import Collision2D
+import Window exposing (Size)
+import Html exposing (..)
+import Task
 
 
-main : Signal Element.Element
-main =
-  Signal.map2 scene Mouse.position Window.dimensions
+type alias Model =
+ { x : Int
+ , y : Int
+ , size: Size
+ }
+
+
+initialModel: Model
+initialModel =
+  { x = 0
+  , y = 0
+  , size = Size 0 0
+  }
+
+
+init : (Model, Cmd Msg)
+init =
+  (initialModel, Task.perform Resize Window.size)
+
+type Msg
+  = Position Int Int
+  | Resize Size
+
+
+update: Msg -> Model -> Model
+update msg model =
+  case msg of
+    Position x y ->
+        { model | x = x, y = y }
+    Resize size ->
+        { model | size = size }
+
+
+view: Model -> Html a
+view model =
+  Element.toHtml <|
+      scene (model.x, model.y) (model.size.width, model.size.height)
 
 
 scene : (Int,Int) -> (Int,Int) -> Element.Element
@@ -48,3 +84,16 @@ message title stringable =
   |> Element.show
   |> Collage.toForm
   |> Collage.move (0, 80)
+
+
+main =
+  Html.program
+    { init = init
+    , update = \msg m -> update msg m ! []
+    , view = view
+    , subscriptions =
+      (\_ -> Sub.batch
+        [ Window.resizes Resize
+        , Mouse.moves (\{x, y} -> Position x y)
+        ])
+    }
