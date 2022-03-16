@@ -1,99 +1,83 @@
-import Color
-import Collage
-import Element
-import Mouse
-import Collision2D
-import Window exposing (Size)
-import Html exposing (..)
-import Task
+module RectangleSide exposing (..)
+
+{-| Demo for `axisAlignedBoundingBox` function.
+-}
+
+import Playground exposing (..)
+import Collision2D exposing (Side(..))
 
 
-type alias Model =
- { x : Int
- , y : Int
- , size: Size
- }
+type alias Memory = 
+  ()
 
 
-initialModel: Model
+initialModel: Memory
 initialModel =
-  { x = 0
-  , y = 0
-  , size = Size 0 0
-  }
+  ()
 
 
-init : (Model, Cmd Msg)
-init =
-  (initialModel, Task.perform Resize Window.size)
-
-type Msg
-  = Position Int Int
-  | Resize Size
-
-
-update: Msg -> Model -> Model
-update msg model =
-  case msg of
-    Position x y ->
-        { model | x = x, y = y }
-    Resize size ->
-        { model | size = size }
-
-
-view: Model -> Html a
-view model =
-  Element.toHtml <|
-      scene (model.x, model.y) (model.size.width, model.size.height)
-
-
-scene : (Int,Int) -> (Int,Int) -> Element.Element
-scene (x,y) (w,h) =
+view : Computer -> Memory -> List Shape
+view computer memory =
   let
-    (dx,dy) = -- Translate Mouse coordinates to Collage coordinate space
-      (toFloat x - toFloat w / 2, toFloat h / 2 - toFloat y)
+    (x, y) =
+      (computer.mouse.x, computer.mouse.y)
 
-    rectangle1Hitbox = -- Create a rectangle hitbox
-      Collision2D.rectangle dx dy 60 60
+    hitbox1 =  
+      Collision2D.rectangle x y 80 60
 
-    rectangle2Hitbox = -- Create a rectangle hitbox
-      Collision2D.rectangle 0 0 80 80
+    hitbox2 = 
+      Collision2D.rectangle 100 100 90 110
 
-    rectanglesCollision2D = -- Which side of rectangle1 is colliding?
-      Collision2D.rectangleSide rectangle1Hitbox rectangle2Hitbox
+    collisionSide =  
+      Collision2D.rectangleSide hitbox1 hitbox2
 
-    rectangleColor = -- If rectangles collide change color
-      if rectanglesCollision2D /= Nothing then Color.red else Color.blue
+    rectangleColor =
+      if collisionSide /= Nothing then red else blue      
 
   in
-    Collage.collage w h
-      [ Collage.rect 80 80
-          |> Collage.filled rectangleColor
+    [ rectangle orange 90 110
+        |> move 100 100
+    -- Follow mouse 
+    , rectangle rectangleColor 80 60
+        |> move x y
+    -- X axis 
+    , rectangle darkGray computer.screen.width 1
+    -- Y axis
+    , rectangle darkGray 1 computer.screen.height
+    , message ("Side " ++ (sideName collisionSide))
+        |> move x (y + 10) 
+    ]
 
-      , Collage.rect 60 60
-          |> Collage.filled Color.orange
-          |> Collage.move (dx, dy)
+sideName: Maybe Side -> String 
+sideName maybeSide =
+  case maybeSide of
+    Just Top ->
+      "top"
 
-      , message "Side" rectanglesCollision2D
-          |> Collage.move (dx, dy + 10)
-      ]
+    Just Right ->
+      "right"
+
+    Just Bottom ->
+      "bottom"
+
+    Just Left ->
+      "left"
+    
+    Nothing ->
+      "none"
 
 
-message : String -> a -> Collage.Form
-message title stringable =
-  title ++ ": " ++ (toString stringable)
-  |> Element.show
-  |> Collage.toForm
+message text = 
+  words black text
+    |> move 0 -70
+
+
+update : Computer -> Memory -> Memory
+update computer memory =
+    memory
 
 
 main =
-  Html.program
-    { init = init
-    , update = \msg m -> update msg m ! []
-    , view = view
-    , subscriptions =
-      (\_ -> Sub.batch
-        [ Window.resizes Resize
-        , Mouse.moves (\{x, y} -> Position x y)
-        ])
-    }
+    Playground.game view update initialModel
+
+

@@ -1,7 +1,7 @@
 module Collision2D exposing
   ( axisAlignedBoundingBox
   , circleToCircle
-  , Side(Top, Right, Bottom, Left)
+  , Side(..)
   , rectangleSide
   , Rectangle
   , rectangle
